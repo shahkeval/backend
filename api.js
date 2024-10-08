@@ -7,7 +7,7 @@ import UserModelSalary from './model/salary.js';
 import UserModelLeave from './model/leave.js';
 
 
-
+console.log("deployed");
 const app = express();
 const port = 8001;
 app.use(cors());
