@@ -13,7 +13,7 @@ const port = 8001;
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect('mongodb+srv://keval:kevalshah123%40@cluster0.ckpdmdv.mongodb.net/payroll_men');
+mongoose.connect('mongodb+srv://keval:kevalshah123%40@cluster0.ckpdmdv.mongodb.net/payroll');
 
 //To get all emp
 app.get('/allEmps', async (req, res) => {
