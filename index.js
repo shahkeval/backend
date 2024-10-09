@@ -10,12 +10,9 @@ import UserModelLeave from './model/leave.js';
 
 const app = express();
 const port = 8001;
-const cors = {
-  origin: 'https://frontend-peach-mu.vercel.app/', // Your frontend domain
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true, // If your frontend requires credentials (cookies, etc.)
-};
-app.use(cors());
+app.use(cors({
+  origin: 'https://frontendme.vercel.app'
+}));
 app.use(express.json());
 
 mongoose.connect('mongodb+srv://keval:kevalshah123@@cluster0.ckpdmdv.mongodb.net/payrollretryWrites=true&w=majority&appName=Cluster0');
