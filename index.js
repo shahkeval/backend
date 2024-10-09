@@ -15,7 +15,7 @@ const corsOptions = {
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true, // If your frontend requires credentials (cookies, etc.)
 };
-app.use(cors());
+app.use(corsOptions());
 app.use(express.json());
 
 mongoose.connect('mongodb+srv://keval:kevalshah123%40@cluster0.ckpdmdv.mongodb.net/payroll');
