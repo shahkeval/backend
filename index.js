@@ -10,6 +10,18 @@ import UserModelLeave from './model/leave.js';
 
 const app = express();
 const port = 8001;
+export default function handler(req, res) {
+  // Add CORS headers to allow access from frontend
+  res.setHeader('Access-Control-Allow-Origin', 'https://frontendme.vercel.app');
+  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  
+  if (req.method === 'OPTIONS') {
+    // Handle preflight requests
+    return res.status(200).end();
+  }
+  res.json({ message: 'Admin route accessed' });
+}
 app.use(cors({
   origin: 'https://frontendme.vercel.app'
 }));
