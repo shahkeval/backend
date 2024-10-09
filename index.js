@@ -11,7 +11,7 @@ import UserModelLeave from './model/leave.js';
 const app = express();
 const port = 8001;
 const corsOptions = {
-  origin: 'https://frontend-peach-mu.vercel.app/', // Your frontend domain
+  origin: ['https://frontendme.vercel.app'], // Your frontend domain
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true, // If your frontend requires credentials (cookies, etc.)
 };
