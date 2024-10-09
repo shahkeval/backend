@@ -82,24 +82,14 @@ app.put('/updateEmp/:id', (req, res) => {
 });
 
 //To Insert admin
-app.post('/login/admin', async (req, res) => {
-  const { email, password } = req.body;
-  console.log(req.body);  // Log incoming body to debug
-
-  if (!email || !password) {
-    return res.status(400).json({ message: 'Email and password are required' });
-  }
-
-  try {
-    const adminUser = await UserModelAdmin.findOne({ email, password });
-    if (adminUser) {
-      return res.json({ message: 'Admin authentication successful', user: adminUser });
+app.post('/Admin',async (req, res) => {
+  const existingUser = await UserModelAdmin.findOne({ id: req.body.id });
+    if (existingUser) {
+      return res.status(400).json({ error: 'User ID is not available' });
     }
-    return res.status(401).json({ message: 'Admin authentication failed' });
-  } catch (error) {
-    console.error('Error during admin login:', error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
+    UserModelAdmin.create(req.body)
+    .then(users => res.json(users))
+    .catch(err => res.json(err));
 });
 
 //To get all admin
