@@ -7,7 +7,7 @@ import UserModelSalary from './model/salary.js';
 import UserModelLeave from './model/leave.js';
 
 
-console.log("deployed");
+
 const app = express();
 const port = 8001;
 const corsOptions = {
@@ -18,9 +18,9 @@ const corsOptions = {
 app.use(corsOptions());
 app.use(express.json());
 
-mongoose.connect('mongodb+srv://keval:kevalshah123%40@cluster0.ckpdmdv.mongodb.net/payroll');
+mongoose.connect('mongodb+srv://keval:kevalshah123@@cluster0.ckpdmdv.mongodb.net/payrollretryWrites=true&w=majority&appName=Cluster0');
 
-//To get all emp
+//To get all emp  
 app.get('/allEmps', async (req, res) => {
   try {
     const response = await UserModelEmp.find({});
