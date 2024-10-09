@@ -16,7 +16,7 @@ app.use(cors({
 
 app.use(express.json());
 
-mongoose.connect('mongodb+srv://keval:kevalshah123@@cluster0.ckpdmdv.mongodb.net/payrollretryWrites=true&w=majority&appName=Cluster0');
+mongoose.connect('mongodb+srv://keval:kevalshah123%40@cluster0.ckpdmdv.mongodb.net/payroll');
 
 //To get all emp  
 app.get('/allEmps', async (req, res) => {
