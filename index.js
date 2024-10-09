@@ -10,13 +10,14 @@ import UserModelLeave from './model/leave.js';
 console.log("deployed");
 const app = express();
 const port = 8001;
-app.use(cors());
-app.use(express.json());
 const corsOptions = {
   origin: 'https://frontend-peach-mu.vercel.app/', // Your frontend domain
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true, // If your frontend requires credentials (cookies, etc.)
 };
+app.use(cors());
+app.use(express.json());
+
 mongoose.connect('mongodb+srv://keval:kevalshah123%40@cluster0.ckpdmdv.mongodb.net/payroll');
 
 //To get all emp
