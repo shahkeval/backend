@@ -10,10 +10,15 @@ import UserModelLeave from './model/leave.js';
 
 const app = express();
 const port = 8001;
-app.use(cors());
+const corsOptions = {
+  origin: 'https://frontend-peach-mu.vercel.app/', // Your frontend domain
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true, // If your frontend requires credentials (cookies, etc.)
+};
+app.use(corsOptions());
 app.use(express.json());
 
-mongoose.connect('mongodb+srv://keval:kevalshah123%40@cluster0.ckpdmdv.mongodb.net/payroll_men');
+mongoose.connect('mongodb+srv://keval:kevalshah123@@cluster0.ckpdmdv.mongodb.net/payrollretryWrites=true&w=majority&appName=Cluster0');
 
 //To get all emp  
 app.get('/allEmps', async (req, res) => {
