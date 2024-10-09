@@ -15,7 +15,7 @@ app.use(express.json());
 
 mongoose.connect('mongodb+srv://keval:kevalshah123%40@cluster0.ckpdmdv.mongodb.net/payroll_men');
 
-//To get all emp
+//To get all emp  
 app.get('/allEmps', async (req, res) => {
   try {
     const response = await UserModelEmp.find({});
