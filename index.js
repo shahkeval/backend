@@ -82,15 +82,25 @@ app.put('/updateEmp/:id', (req, res) => {
 });
 
 //To Insert admin
-app.post('/Admin',async (req, res) => {
-  const existingUser = await UserModelAdmin.findOne({ id: req.body.id });
+app.post('/Admin', async (req, res) => {
+  try {
+    // Check if a user with the same ID already exists
+    const existingUser = await UserModelAdmin.findOne({ id: req.body.id });
+    
     if (existingUser) {
       return res.status(400).json({ error: 'User ID is not available' });
     }
-    UserModelAdmin.create(req.body)
-    .then(users => res.json(users))
-    .catch(err => res.json(err));
+    
+    // Create a new user and return the created user
+    const newUser = await UserModelAdmin.create(req.body);
+    res.status(201).json(newUser); // Respond with 201 Created status
+  } catch (err) {
+    // Handle errors and respond with an appropriate status code
+    console.error('Error creating admin:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
+
 
 //To get all admin
 app.get('/allAdmin', async (req, res) => {
