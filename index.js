@@ -10,11 +10,7 @@ import UserModelLeave from './model/leave.js';
 
 const app = express();
 const port = 8001;
-app.use(cors({
-  origin: 'https://frontendme.vercel.app',  // Allow requests from your frontend
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Allow headers if needed
-}));
+app.use(cors());
 
 
 app.use(express.json());
@@ -82,14 +78,23 @@ app.put('/updateEmp/:id', async (req, res) => {
 });
 
 //To Insert admin
-app.post('/Admin',async (req, res) => {
-  const existingUser = await UserModelAdmin.findOne({ id: req.body.id });
+app.post('/Admin', async (req, res) => {
+  try {
+    // Check if the user already exists
+    const existingUser = await UserModelAdmin.findOne({ id: req.body.id });
+    
     if (existingUser) {
       return res.status(400).json({ error: 'User ID is not available' });
     }
-    UserModelAdmin.create(req.body)
-    .then(users => res.json(users))
-    .catch(err => res.json(err));
+
+    // Create a new user if the ID is not taken
+    const newUser = await UserModelAdmin.create(req.body);
+    return res.status(201).json(newUser); // 201 status code for created resource
+  } catch (err) {
+    // Catch any errors and send a 500 response
+    console.error('Error creating user:', err);
+    return res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
 //To get all admin
