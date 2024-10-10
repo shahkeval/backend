@@ -64,7 +64,7 @@ app.delete('/deleteEmp/:id', async (req, res) => {
 });
 
 //To Update emp
-app.put('/updateEmp/:id', (req, res) => {
+app.put('/updateEmp/:id', async (req, res) => {
   const { id } = req.params;
   UserModelEmp.findOneAndUpdate(
     { id: id },
