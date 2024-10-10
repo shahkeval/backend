@@ -12,7 +12,7 @@ const app = express();
 const port = 8001;
 app.use(cors({
   origin: 'https://frontendme.vercel.app',  // Allow requests from your frontend
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
+  methods: ['GET', 'POST'], // Allowed methods
   allowedHeaders: ['Content-Type', 'Authorization'], // Allow headers if needed
 }));
 
