@@ -375,7 +375,7 @@ app.post('/forgot-password', async (req, res) => {
         to: email,
         from: emml,
         subject: 'Password Reset',
-        text: `You are receiving this because you (or someone else) requested to reset your password. Click the following link to reset your password: http://localhost:5000/reset-password/${resetToken}`,
+        text: `You are receiving this because you (or someone else) requested to reset your password. Click the following link to reset your password: https://backendapi-indol-psi.vercel.app/reset-password/${resetToken}`,
     };
     console.log("hello forgot8");
     transporter.sendMail(mailOptions, (error, response) => {
