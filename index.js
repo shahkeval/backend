@@ -14,7 +14,7 @@ dotenv.config();
 
 // Create an Express application
 const app = express();
-const port = 8001;
+const port = process.env.PORT || 8001; // Use environment variable or default to 8001
 
 // Middleware
 app.use(cors());
@@ -25,8 +25,8 @@ mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
-.then(() => console.log("MongoDB connected"))
-.catch((err) => console.error("MongoDB connection error:", err));
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => console.error("MongoDB connection error:", err));
 
 // Routes
 
@@ -36,7 +36,7 @@ app.get('/allEmps', async (req, res) => {
     const response = await UserModelEmp.find({});
     res.status(200).send(response);
   } catch (error) {
-    console.error('Error while getting employees', error);
+    console.error('Error while getting employees:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
@@ -50,7 +50,7 @@ app.post('/Emp', async (req, res) => {
     const newUser = await UserModelEmp.create(req.body);
     res.status(201).json(newUser);
   } catch (error) {
-    console.error('Error while creating employee', error);
+    console.error('Error while creating employee:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
@@ -75,6 +75,9 @@ app.put('/updateEmp/:id', async (req, res) => {
       req.body,
       { new: true }
     );
+    if (!updatedUser) {
+      return res.status(404).json({ error: 'Employee not found' });
+    }
     res.json(updatedUser);
   } catch (error) {
     console.error('Error updating employee:', error);
@@ -102,7 +105,7 @@ app.get('/allAdmin', async (req, res) => {
     const response = await UserModelAdmin.find({});
     res.status(200).send(response);
   } catch (error) {
-    console.error('Error while getting admins', error);
+    console.error('Error while getting admins:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
@@ -127,6 +130,9 @@ app.put('/updateAdmin/:id', async (req, res) => {
       req.body,
       { new: true }
     );
+    if (!updatedUser) {
+      return res.status(404).json({ error: 'Admin not found' });
+    }
     res.json(updatedUser);
   } catch (error) {
     console.error('Error updating admin:', error);
@@ -163,7 +169,7 @@ app.post('/forgot-password', async (req, res) => {
       text: `You requested a password reset. Click the following link to reset your password: https://yourdomain.com/reset-password/${resetToken}`,
     };
 
-    transporter.sendMail(mailOptions, (error, response) => {
+    transporter.sendMail(mailOptions, (error) => {
       if (error) {
         console.error('Error sending email:', error);
         return res.status(500).json({ message: 'Failed to send email' });
@@ -187,7 +193,8 @@ app.post('/reset-password/:token', async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    user.password = password; // Add proper password hashing if necessary
+    // You should hash the password before saving it
+    user.password = password; // Use bcrypt or a similar library for hashing
     user.resetPasswordToken = null;
     await user.save();
 
@@ -196,6 +203,11 @@ app.post('/reset-password/:token', async (req, res) => {
     console.error('Error in reset-password route:', error);
     res.status(400).json({ message: 'Invalid or expired token' });
   }
+});
+
+// Handle 404 errors
+app.use((req, res) => {
+  res.status(404).json({ error: 'Not Found' });
 });
 
 // Start the server
