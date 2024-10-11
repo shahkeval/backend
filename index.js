@@ -11,7 +11,7 @@ import UserModelLeave from './model/leave.js';
 const app = express();
 const port = 8001;
 app.use(cors({
-  origin: 'https://frontendme.vercel.app',  // Allow requests from your frontend
+  origin: '*',  // Allow requests from your frontend
   methods: ['GET', 'POST'], // Allowed methods
   allowedHeaders: ['Content-Type', 'Authorization'], // Allow headers if needed
 }));
