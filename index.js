@@ -10,12 +10,14 @@ import UserModelLeave from './model/leave.js';
 
 const app = express();
 const port = 8001;
-app.use(cors({
-  origin: '*',  // Allow requests from your frontend
-  methods: ['GET', 'POST'], // Allowed methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Allow headers if needed
-}));
-
+const corsHeader = {
+  headers: {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Credentials': false
+  }
+};
+   
+app.use(cors(corsHeader))
 
 app.use(express.json());
 mongoose.connect('mongodb+srv://keval:kevalshah123%40@cluster0.ckpdmdv.mongodb.net/payroll', {
