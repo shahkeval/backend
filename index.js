@@ -9,15 +9,18 @@ import UserModelLeave from './model/leave.js';
 
 
 const app = express();
+
+
+
 const port = 8001;
-const corsHeader = {
-  headers: {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Credentials': false
-  }
-};
-   
-app.use(cors(corsHeader))
+//const corsHeader = {
+//  headers: {
+//    'Access-Control-Allow-Origin': '*',
+//    'Access-Control-Allow-Credentials': false
+//  }
+//};
+//   
+//app.use(cors(corsHeader))
 
 app.use(express.json());
 mongoose.connect('mongodb+srv://keval:kevalshah123%40@cluster0.ckpdmdv.mongodb.net/payroll', {
@@ -337,17 +340,12 @@ app.put('/rejectLeave/:id', async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`server is running on port ${port}`);
-});   
 
-const router = express.Router();
-
-import jwt from 'jsonwebtoken';
-import nodemailer from 'nodemailer';
-import User from './model/admin.js'; // Make sure the path is correct
-import dotenv from 'dotenv';
-dotenv.config(); // This loads environment variables from your .env file
+// import jwt from 'jsonwebtoken';
+// import nodemailer from 'nodemailer';
+// import User from './model/admin.js'; // Make sure the path is correct
+// import dotenv from 'dotenv';
+// dotenv.config(); // This loads environment variables from your .env file
 
 app.post('/forgot-password', async (req, res) => {
   console.log("hello forgot");
@@ -403,7 +401,6 @@ app.post('/forgot-password', async (req, res) => {
     
 });
 
-export default router;
 
 app.post('/reset-password/:token', async (req, res) => {
   console.log("hello reset 1");
@@ -438,3 +435,13 @@ app.post('/reset-password/:token', async (req, res) => {
         return res.status(400).json({ message: 'Invalid or expired token' });
     }
 });
+
+
+app.listen(port, () => {
+  console.log(`server is running on port ${port}`);
+});   
+
+const router = express.Router();
+export default router;
+
+// module.exports = app;
