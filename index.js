@@ -20,7 +20,10 @@ const port = 8001;
 //  }
 //};
 //   
-//app.use(cors(corsHeader))
+const headers={
+  "content-Type":"application/json",
+}
+app.use(cors(headers));
 
 app.use(express.json());
 mongoose.connect('mongodb+srv://keval:kevalshah123%40@cluster0.ckpdmdv.mongodb.net/payroll', {
