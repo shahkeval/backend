@@ -42,7 +42,9 @@ app.get('/allEmps', async (req, res) => {
     console.log('Error while insert order', error);
   }
 });
-
+app.get("/",async (req,res)=>{
+  res.json("hello");
+})
 //To insert emp
 app.post('/Emp',async (req, res) => {
   const existingUser = await UserModelEmp.findOne({ id: req.body.id });
