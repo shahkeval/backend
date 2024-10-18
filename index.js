@@ -13,15 +13,15 @@ const app = express();
 
 
 const port = 8001;
-//const corsHeader = {
-//  headers: {
-//    'Access-Control-Allow-Origin': '*',
-//    'Access-Control-Allow-Credentials': false
-//  }
-//};
-//   
+app.use(cors(
+  {
+  origin: ["https://frontendme.vercel.app"],
+  methods: ["POST", "GET"], 
+  credentials: true
+  }
+  ));
 
-app.use(cors());
+
 
 app.use(express.json());
 mongoose.connect('mongodb+srv://keval:kevalshah123%40@cluster0.ckpdmdv.mongodb.net/payroll', {
