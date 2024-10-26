@@ -44,7 +44,7 @@ app.get('/allEmps', async (req, res) => {
 });
 app.get("/",async (req,res)=>{
   res.json("hello");
-})
+});
 //To insert emp
 app.post('/Emp',async (req, res) => {
   const existingUser = await UserModelEmp.findOne({ id: req.body.id });
