@@ -350,7 +350,7 @@ app.post('/forgot-password', async (req, res) => {
     const { email } = req.body;
     console.log("hello forgot1");
     // Check if user exists
-    const user = await User.findOne({ email });
+    const user = await UserModelAdmin.findOne({ email });
     console.log("hello forgot2");
     if (!user) {
       console.log("hello forgot3");
@@ -410,7 +410,7 @@ app.post('/reset-password/:token', async (req, res) => {
       const keyy="mySuperSecretKey123456987!";
 
         const decoded = jwt.verify(token, keyy);
-        const user = await User.findById(decoded.id);
+        const user = await UserModelAdmin.findById(decoded.id);
 
         if (!user) {
           console.log("hello reset 4");
