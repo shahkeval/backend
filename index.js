@@ -13,13 +13,7 @@ const app = express();
 
 
 const port = 8001;
-app.use(cors(
-  {
-  origin: ["https://frontendme.vercel.app"],
-  methods: ["POST", "GET","DELETE","PUT"], 
-  credentials: true
-  }
-  ));
+app.use(cors());
 
 
 
